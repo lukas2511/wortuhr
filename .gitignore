@@ -1,0 +1,6 @@
+*.elf
+*.bin
+*.map
+*.o
+*.d
+wortuhr.h
