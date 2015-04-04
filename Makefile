@@ -29,4 +29,3 @@ libopencm3/lib/stm32/f1/timer.o:
 
 clean:
 	rm -f wortuhr.o wortuhr.h wortuhr.bin wortuhr.elf wortuhr.d wortuhr.map
-	make -C settime clean
