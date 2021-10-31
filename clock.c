@@ -12,6 +12,8 @@ int is_dst(tmElements_t *tm, bool utc) {
   int rem_days_of_month = 31 - tm->Day;
   int rem_days_of_week = (6 - tm->Wday);
 
+  printf("%d %d %d\n", rem_days_of_month, rem_days_of_week, tm->Wday);
+
   if(tm->Month == 3) {
     if (rem_days_of_week >= rem_days_of_month) {
       if (tm->Wday == 0) {
@@ -47,7 +49,7 @@ void set_clock(tmElements_t *tm) {
   timefoo[1] = 0x80;
   timefoo[2] = dec2bcd(tm->Minute);
   timefoo[3] = dec2bcd(tm->Hour);
-  timefoo[4] = dec2bcd(tm->Wday);
+  timefoo[4] = dec2bcd(tm->Wday + 1);
   timefoo[5] = dec2bcd(tm->Day);
   timefoo[6] = dec2bcd(tm->Month);
   timefoo[7] = dec2bcd(tmYearToY2k(tm->Year));
@@ -74,7 +76,7 @@ void read_clock(tmElements_t *tm) {
   tm->Second = bcd2dec(buf[0]);
   tm->Minute = bcd2dec(buf[1]);
   tm->Hour = bcd2dec(buf[2]);
-  tm->Wday = bcd2dec(buf[3]);
+  tm->Wday = bcd2dec(buf[3]) - 1;
   tm->Day = bcd2dec(buf[4]);
   tm->Month = bcd2dec(buf[5]);
   tm->Year = y2kYearToTm(bcd2dec(buf[6]));
